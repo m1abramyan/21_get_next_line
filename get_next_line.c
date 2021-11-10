@@ -88,8 +88,19 @@ char	*ft_strchr(const char *s, int c)
 
 char	*check_memory(char *memory, char *line)
 {	
+	char		*pointer_n; // указатель на конец строки
+	
 	if (memory)
-		line = ft_strdup(memory);
+	{
+		if((pointer_n = ft_strchr(memory, '\n')))
+		{
+			*pointer_n = '\0';
+			line = ft_strdup(memory);
+			memory = ft_strdup(++pointer_n);
+		}
+		else
+			line = ft_strdup(memory);
+	}
 	else
 		line = "\0";
 	return(line);
@@ -106,11 +117,7 @@ char    *get_next_line(int fd)
 	static char	*memory; // остаток прочитанной строки
 
 	flag = 1;
-	// check_memory(memory, line);
-	if (memory)
-		line = ft_strdup(memory);
-	else
-		line = "\0";
+	line = check_memory(memory, line);
     while (flag && (byte = read(fd, buf, 1000)))
     {
 		if((pointer_n = ft_strchr(buf, '\n')))
@@ -122,7 +129,7 @@ char    *get_next_line(int fd)
 		}
         buf[byte] = '\0';
         line = ft_strjoin(line, buf);
-    }    
+    }
     return(line);
 }
 
@@ -135,6 +142,9 @@ int main(void)
     line = get_next_line(fd);
     printf("%s\n", line);
 
+	line = get_next_line(fd);
+    printf("%s\n", line);
+	
 	line = get_next_line(fd);
     printf("%s\n", line);
 
