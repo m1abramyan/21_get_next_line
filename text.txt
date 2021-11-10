@@ -1,0 +1,12 @@
+Arrays in C (and many other languages) have a zero based index system.  
+An array of size 20 elements has indices ranging from 0 to 19 inclusive.
+This is just how it works - thus index 20 would point at the 21st element.
+line = get_next_line(fd);
+line = get_next_line(fd);
+line = get_next_line(fd);
+Arrays in C (and many other languages) have a zero based index system.
+An array of size 20 elements has indices ranging from 0 to 19 inclusive.
+This is just how it works - thus index 20 would point at the 21st element.
+line = get_next_line(fd);
+line = get_next_line(fd);
+line = get_next_line(fd);
